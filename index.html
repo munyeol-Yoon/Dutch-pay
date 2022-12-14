@@ -1,0 +1,30 @@
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>더치페이</title>
+  </head>
+  <body>
+    <header>
+      <h1>돈 계산하기 귀찮아서 만듬</h1>
+    </header>
+    <form id="peopleForm">
+      <label for="people">인원수 : </label>
+      <input
+        type="number"
+        placeholder="인원수입력"
+        id="people"
+        name="people"
+        max=""
+        required
+      />
+      <input type="submit" value="확인" id="peopleBtn" />
+    </form>
+    <p id="people-notice"></p>
+    <form id="moneyForm"></form>
+    <script src="./js/people.js"></script>
+  </body>
+</html>
