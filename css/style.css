@@ -1,2 +1,6 @@
-body {
+button {
+  cursor: pointer;
+}
+#total-redoButton {
+  display: none;
 }
