@@ -1,0 +1,82 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
+}
+input {
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
+  outline: none;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+form {
+  font-size: 1.5rem;
+}
+form input {
+  font-size: 1.5rem;
+  margin: 4px;
+}
+form button {
+  cursor: pointer;
+  font-family: "Black Han Sans", sans-serif;
+  border-radius: 5px;
+  width: 3.5rem;
+  font-size: 1.5rem;
+  border: none;
+}
+form button:hover {
+  background-color: #3d4043;
+  color: white;
+}
+#peopleBtn {
+  cursor: pointer;
+  font-family: "Black Han Sans", sans-serif;
+  border-radius: 5px;
+  width: 3.5rem;
+  font-size: 1.5rem;
+}
+#peopleBtn:hover {
+  background-color: #3d4043;
+  color: white;
+}
+#moneyForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  margin-top: 4rem;
+  height: 80vh;
+}
+#moneyForm input {
+  margin: 10px;
+}
+#all-total {
+  font-size: 1.5rem;
+  margin: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#all-total #total > p {
+  margin: 10px;
+}
+#total-redoButton {
+  cursor: pointer;
+  font-family: "Black Han Sans", sans-serif;
+  border-radius: 5px;
+  width: 7.5rem;
+  font-size: 1.5rem;
+  border: none;
+  margin: 20px;
+}
+#total-redoButton:hover {
+  background-color: #3d4043;
+  color: white;
+}
