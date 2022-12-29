@@ -10,20 +10,28 @@ const $total = document.querySelector("#total");
 const $redoBtn = document.querySelector("#total-redoButton");
 
 const objArr = [];
+let maxPeople = 0;
 let sortArr = [];
+
+let trycheck = false;
 
 const handlePeopleCount = (event) => {
   event.preventDefault();
   //console.log($peopleInput.value);
   $notice.textContent = `${$peopleInput.value} 명 입니다. 각자 낸 금액을 입력해주세요.`;
+  maxPeople = $peopleInput.value;
   handlePeopleInput($peopleInput.value);
   $peopleInput.value = null;
   $peopleForm.style.display = "none";
 };
 const handlePeopleInput = (value) => {
+  if (trycheck === true) {
+    $moneyForm.style.display = "block";
+  }
   for (let i = 0; i < value; i++) {
     let input = document.createElement("input");
     let label = document.createElement("label");
+    input.type = "number";
     $moneyForm.append(label);
     label.textContent = `${i + 1} 번째사람이 낸 금액  `;
     $moneyForm.append(input);
@@ -34,8 +42,9 @@ const handlePeopleInput = (value) => {
   let button = document.createElement("button");
   $moneyForm.append(button);
   button.innerText = "확인";
+
   button.addEventListener("click", handleValueSave);
-};
+}; //소수단위 입력시 막을방법 10원이하는 입력안되게
 
 const handleValueSave = (event) => {
   event.preventDefault();
@@ -44,8 +53,12 @@ const handleValueSave = (event) => {
   for (let i = 1; i <= Object.keys(objArr).length; i++) {
     const people = document.getElementById(`people${i}`);
     //console.log(people.value);
-    objArr[`people${i}`] = people.value;
-    people.value = null;
+    try {
+      objArr[`people${i}`] = people.value;
+      people.value = null;
+    } catch {
+      objArr[`people${i}`] = Number(0);
+    }
   }
   handleSort();
 };
@@ -96,4 +109,14 @@ const handleCalculator = () => {
   $redoBtn.style.display = "block";
 };
 
+const handleRetry = () => {
+  $redoBtn.style.display = "none";
+  $total.innerHTML = "";
+  $moneyForm.innerHTML = "";
+  maxPeople = 0;
+  $peopleForm.style.display = "block";
+  trycheck = true;
+};
+
 $peopleForm.addEventListener("submit", handlePeopleCount);
+$redoBtn.addEventListener("click", handleRetry);
