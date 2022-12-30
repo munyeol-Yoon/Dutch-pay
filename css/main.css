@@ -80,3 +80,113 @@ form button:hover {
   background-color: #3d4043;
   color: white;
 }
+
+@media only screen and (min-width: 2560px) {
+  form,
+  form input,
+  form button {
+    font-size: 4rem;
+  }
+  form button {
+    width: 12rem;
+  }
+  #peopleBtn {
+    font-size: 4rem;
+    width: 12rem;
+  }
+  #all-total {
+    font-size: 4rem;
+  }
+  #total-redoButton {
+    font-size: 4rem;
+    width: 18rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 2560px) {
+  form,
+  form input,
+  form button {
+    font-size: 3rem;
+  }
+  form button {
+    width: 9rem;
+  }
+  #peopleBtn {
+    font-size: 3rem;
+    width: 9rem;
+  }
+  #all-total {
+    font-size: 3rem;
+  }
+  #total-redoButton {
+    font-size: 3rem;
+    width: 15rem;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  form,
+  form input,
+  form button {
+    font-size: 2.5rem;
+  }
+  form button {
+    width: 7rem;
+  }
+  #peopleBtn {
+    font-size: 2.5rem;
+    width: 7rem;
+  }
+  #all-total {
+    font-size: 2.5rem;
+  }
+  #total-redoButton {
+    font-size: 2.5rem;
+    width: 13.5rem;
+  }
+}
+
+@media only screen and (min-width: 425px) and (max-width: 768px) {
+  form,
+  form input,
+  form button {
+    font-size: 1rem;
+  }
+  form button {
+    width: 4rem;
+  }
+  #peopleBtn {
+    font-size: 1rem;
+    width: 4rem;
+  }
+  #all-total {
+    font-size: 1rem;
+  }
+  #total-redoButton {
+    font-size: 1rem;
+    width: 8rem;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 425px) {
+  form,
+  form input,
+  form button {
+    font-size: 1rem;
+  }
+  form button {
+    width: 3rem;
+  }
+  #peopleBtn {
+    font-size: 1rem;
+    width: 3rem;
+  }
+  #all-total {
+    font-size: 1rem;
+  }
+  #total-redoButton {
+    font-size: 1rem;
+    width: 4rem;
+  }
+}
