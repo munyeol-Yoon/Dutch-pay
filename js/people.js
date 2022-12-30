@@ -112,3 +112,5 @@ const handleRetry = () => {
 
 $peopleForm.addEventListener("submit", handlePeopleCount);
 $redoBtn.addEventListener("click", handleRetry);
+
+//배포용
