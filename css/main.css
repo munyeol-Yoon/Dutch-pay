@@ -63,6 +63,8 @@ form button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 80vh;
+  overflow: auto;
 }
 #all-total #total > p {
   margin: 10px;
