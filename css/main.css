@@ -192,3 +192,30 @@ form button:hover {
     width: 6rem;
   }
 }
+@media only screen and (max-width: 320px) {
+  form,
+  form input,
+  form button {
+    font-size: 0.6rem;
+  }
+  form button {
+    width: 2.5rem;
+  }
+  #peopleBtn {
+    font-size: 0.6rem;
+    width: 2.5rem;
+  }
+  #all-total {
+    font-size: 0.6rem;
+  }
+  #total-redoButton {
+    font-size: 0.6rem;
+    width: 4rem;
+  }
+}
+
+@media only screen and (max-width: 167px) {
+  form input {
+    width: 3rem;
+  }
+}
