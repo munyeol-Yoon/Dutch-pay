@@ -15,7 +15,7 @@ let sortArr = []; // 금액별 정렬
 let recipient = []; // 받는사람
 let giver = []; // 주는사람
 
-let trycheck = false;
+let trycheck = false; // 다시하는지 확인
 
 const peopleConuting = (event) => {
   event.preventDefault();
