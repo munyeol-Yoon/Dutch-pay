@@ -9,21 +9,23 @@ const $total = document.querySelector("#total");
 
 const $redoBtn = document.querySelector("#total-redoButton");
 
-let objArr = [];
+let objArr = []; // 초기배열
 let maxPeople = 0;
-let sortArr = [];
+let sortArr = []; // 금액별 정렬
+let recipient = []; // 받는사람
+let giver = []; // 주는사람
 
 let trycheck = false;
 
-const handlePeopleCount = (event) => {
+const peopleConuting = (event) => {
   event.preventDefault();
   //$notice.textContent = `${$peopleInput.value} 명 입니다. 각자 낸 금액을 입력해주세요.`;
   maxPeople = $peopleInput.value;
-  handlePeopleInput($peopleInput.value);
+  peopleInsert($peopleInput.value);
   $peopleInput.value = null;
   $peopleForm.style.display = "none";
 };
-const handlePeopleInput = (value) => {
+const peopleInsert = (value) => {
   if (trycheck === true) {
     $moneyForm.style.display = "flex";
     objArr = [];
@@ -45,10 +47,10 @@ const handlePeopleInput = (value) => {
   $moneyForm.append(button);
   button.innerText = "확인";
 
-  button.addEventListener("click", handleValueSave);
+  button.addEventListener("click", valueSave);
 };
 
-const handleValueSave = (event) => {
+const valueSave = (event) => {
   event.preventDefault();
   $moneyForm.style.display = "none";
   //$notice.style.display = "none";
@@ -62,40 +64,97 @@ const handleValueSave = (event) => {
       objArr[`people${i}`] = Number(0);
     }
   }
-  handleSort();
+  arraySort();
 };
 
-const handleSort = () => {
+const arraySort = () => {
   sortArr = [];
+  recipient = [];
   for (let name in objArr) {
     sortArr.push([name, objArr[name]]);
   }
   sortArr.sort((a, b) => b[1] - a[1]);
-  handleCalculator();
+  if (recipient !== "") {
+    arraySplit();
+  }
+  moneyPrintingPage();
 };
 
-const handleCalculator = () => {
+const arraySplit = () => {
+  giver = [];
   let sum = 0;
   for (let i = 0; i < sortArr.length; i++) {
     sum += Number(sortArr[i][1]);
   }
   let divide = Math.floor(sum / sortArr.length);
+  for (let i = 0; i < sortArr.length; i++) {
+    sortArr[i].push(divide);
+    sortArr[i].push(sortArr[i][1] - sortArr[i][2]);
+    if (sortArr[i][3] > 0) {
+      // 돈을받아야하는사람
+      recipient.push(sortArr[i]);
+    } else if (sortArr[i][3] <= 0) {
+      // 돈을내야하는사람
+      giver.push(sortArr[i]);
+    }
+  }
+  noticeMoney(sum, divide);
+};
+
+const noticeMoney = (sum, divide) => {
   let $p = document.createElement("p");
   $total.append($p);
   $p.textContent = `총합계 ${sum}원, 각자 내야할 돈은 ${divide}원 입니다. `;
-  for (let i = 1; i < sortArr.length; i++) {
+};
+
+const giverPrint = () => {
+  //rec 8000, giv -11000
+  //rec 14000, giv -3000
+
+  for (let i = 0; i < recipient.length; i++) {
+    for (let j = 0; j < giver.length; j++) {
+      let $p = document.createElement("p");
+      $total.append($p);
+
+      if (recipient[i][3] < Math.abs(giver[j][3])) {
+        let money = recipient[i][3];
+        giver[j][3] += money;
+        // giv -3000
+        $p.textContent = `${giver[j][0].charAt(
+          giver[0][0].length - 1
+        )}번째님 ${recipient[i][0].charAt(
+          recipient[0][0].length - 1
+        )}번째님에게 ${Math.abs(money)}원 입금하시면됩니다.`;
+        recipient[i][3] = 0;
+        //rec 0
+
+        i++;
+        j--;
+      } else {
+        recipient[i][3] -= Math.abs(giver[j][3]);
+
+        $p.textContent = `${giver[j][0].charAt(
+          giver[0][0].length - 1
+        )}번째님 ${recipient[i][0].charAt(
+          recipient[0][0].length - 1
+        )}번째님에게 ${Math.abs(giver[j][3])}원 입금하시면됩니다.`;
+        giver[j][3] = 0;
+      }
+    }
+  }
+};
+
+const moneyPrintingPage = () => {
+  for (let i = 0; i < sortArr.length; i++) {
     let $p = document.createElement("p");
     $total.append($p);
-    if (Math.abs(divide - sortArr[i][1]) === 0) {
+    if (sortArr[i][3] > 0) {
       $p.textContent = `${sortArr[i][0].charAt(
         sortArr[0][0].length - 1
-      )}번째님은 입금안하셔도 됩니다.`;
-    } else {
-      $p.textContent = `${sortArr[i][0].charAt(
-        sortArr[0][0].length - 1
-      )}번째님 ${sortArr[0][0].charAt(
-        sortArr[0][0].length - 1
-      )}번째님에게 ${Math.abs(divide - sortArr[i][1])}원 입금하시면됩니다.`;
+      )}번째님 총 ${sortArr[i][3]}원 받으시면됩니다.`;
+    } else if (sortArr[i][3] < 0) {
+      // 함수만들기
+      giverPrint();
     }
   }
   $redoBtn.style.display = "block";
@@ -110,7 +169,7 @@ const handleRetry = () => {
   trycheck = true;
 };
 
-$peopleForm.addEventListener("submit", handlePeopleCount);
+$peopleForm.addEventListener("submit", peopleConuting);
 $redoBtn.addEventListener("click", handleRetry);
 
 //배포용
